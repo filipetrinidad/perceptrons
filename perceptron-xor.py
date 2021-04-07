@@ -7,9 +7,17 @@ pesos0 = np.array([-0.345, -0.289, -0.134, 0.876, 0.387, -0.456])
 pesos1 = np.array([[0.765], [-0.234], [-0.492])
 
 treinos = 1000
-taxaaprendizado = 0.3
+taxaAprendizado = 0.3
 momentum = 1
 
-def sigmoide(soma):
+def sigmoid(soma):
     return 1 / ( 1 + np.exp(-soma))
+
+for i in range(treinos):
+    camadaEntrada = entradas
+    somaSinapse0 = np.dot(camadaEntrada, pesos0)
+    camadaOculta = sigmoid(somaSinapse0)
+
+    somaSinapse1 = np.dot(camadaOculta, pesos1)
+    camadaSaida = sigmoid(somaSinapse1)
 
