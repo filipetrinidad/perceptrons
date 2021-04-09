@@ -17,7 +17,7 @@ def sigmoidDerivada(sig):
     return sig * (1-sig)
 
 derivada0 = sigmoidDerivada(0.5)
-derivada1 = sigmoidDerivada(sigmoid)
+derivada1 = sigmoidDerivada(derivada0)
 
 for i in range(treinos):
     camadaEntrada = entradas
@@ -30,4 +30,14 @@ for i in range(treinos):
     erroCamadaSaida = saidas - camadaSaida
     media = np.mean(np.abs(erroCamadaSaida))
     
+    derivadaSaida = sigmoidDerivada(camadaSaida)
+    deltaSaida = erroCamadaSaida * derivadaSaida
+
+    pesos1Transposta = pesos1.T
+    deltaSaidaXpesos = deltaSaida.dot(pesos1Transposta)
+    deltaCamadaOculta = deltaSaidaXpesos * sigmoidDerivada(camadaOculta)
+
+    camadaOcultaTransposta = camadaEntrada.T
+    pesos4 = camadaOcultaTransposta.dot(deltaCamadaOculta)
+    pesos0 = (pesos0*momentum) + (pesos4*taxaAprendizado)
 
